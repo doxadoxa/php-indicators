@@ -1,0 +1,23 @@
+{
+    "name": "doxadoxa/php-indicators",
+    "description": "Indicator library for PHP.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Taras Dovgal",
+            "email": "td@hrom.fund"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php" : "^7.3",
+        "ext-trader" : "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Doxadoxa\\PhpIndicators\\": "src/"
+        }
+    },
+    "version": "0.1"
+}
