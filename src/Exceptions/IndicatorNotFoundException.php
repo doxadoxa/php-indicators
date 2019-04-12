@@ -7,5 +7,5 @@ use Exception;
 
 class IndicatorNotFoundException extends Exception
 {
-
+    protected $message = "Indicator not found.";
 }

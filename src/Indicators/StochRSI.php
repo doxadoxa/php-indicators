@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Doxadoxa\PhpIndicators\Indicators;
 
 use Doxadoxa\PhpIndicators\ArrayIndicator;
+use Doxadoxa\PhpIndicators\Exceptions\PeriodCantBeLessNumberException;
 
 /**
  * Class StochRSI
@@ -15,7 +16,7 @@ class StochRSI extends ArrayIndicator
      * RSI constructor.
      * @param ArrayIndicator $indicator
      * @param int $period
-     * @throws \Doxadoxa\PhpIndicators\Exceptions\PeriodCantBeLessNumberException
+     * @throws PeriodCantBeLessNumberException
      */
     public function __construct( ArrayIndicator $indicator, int $period = 2 )
     {

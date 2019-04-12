@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Doxadoxa\PhpIndicators;
 
 use ArrayAccess;
+use Doxadoxa\PhpIndicators\Exceptions\CantCompareLessTwoElementsException;
 use Doxadoxa\PhpIndicators\Exceptions\PeriodCantBeLessNumberException;
 use Doxadoxa\PhpIndicators\Exceptions\PeriodCantBeNegativeException;
 use Exception;
@@ -13,14 +14,14 @@ use function count;
 class ArrayIndicator implements Indicator, ArrayAccess
 {
     private $indicator;
-    private $defaulValue = 0;
+    private $defaultValue = 0;
 
     private $indicators;
 
     public function __construct(array $indicator, ?int $defaultValue = 0 )
     {
         $this->indicator = $indicator;
-        $this->defaulValue = $defaultValue;
+        $this->defaultValue = $defaultValue;
 
         $this->indicators = new Indicators();
     }
@@ -33,7 +34,7 @@ class ArrayIndicator implements Indicator, ArrayAccess
     public function last(int $n = 0)
     {
         if (count($this->indicator) - 1 - $n < 0) {
-            return $this->defaulValue;
+            return $this->defaultValue;
         }
 
         return $this->indicator[count($this->indicator) - 1 - $n];
@@ -177,17 +178,18 @@ class ArrayIndicator implements Indicator, ArrayAccess
 
     /**
      * @param int $count
+     * @param bool $safe
      * @return bool
-     * @throws Exception
+     * @throws CantCompareLessTwoElementsException
      */
-    public function equals(int $count = 2): bool
+    public function equals(int $count = 2, bool $safe = true): bool
     {
-        if( $count = 1 ) {
-            return true;
+        if( $count < 2 && !$safe ) {
+            throw new CantCompareLessTwoElementsException("You cant compare less 2 elements.");
         }
 
-        if( $count < 2 ) {
-            throw new Exception("You cant compare less 2 elements.");
+        if ( $count == 1 && $safe ) {
+            return true;
         }
 
         $equals = true;

@@ -7,5 +7,5 @@ use Exception;
 
 class PeriodCantBeLessNumberException extends Exception
 {
-
+    protected $message = "Period can't be less got value.";
 }
